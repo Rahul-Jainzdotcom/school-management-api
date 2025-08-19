@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const db = mysql.createPool({
