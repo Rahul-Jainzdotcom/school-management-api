@@ -23,12 +23,14 @@ const db = mysql.createPool({
   queueLimit: 0
 });
 
-db.connect((err) => {
+// Test DB connection
+db.getConnection((err, connection) => {
   if (err) {
-    console.error('Database connection failed:', err);
-    return;
+    console.error('❌ Database connection failed:', err.message);
+  } else {
+    console.log('✅ Database connected successfully!');
+    connection.release();
   }
-  console.log('Connected to MySQL database');
 });
 
 const createTableQuery = `
