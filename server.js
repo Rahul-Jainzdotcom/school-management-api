@@ -95,6 +95,7 @@ app.get('/', (req, res) => {
 // Add School API
 app.post('/addSchool', (req, res) => {
   try {
+    console.log("BODY RECEIVED:", req.body);
     // Validate input data
     console.log("Headers:", req.headers);
     console.log("Incoming body:", req.body);
