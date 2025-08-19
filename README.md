@@ -20,7 +20,7 @@ API Endpoints
 1. Add School (POST /addSchool)
 This endpoint allows you to add a new school to the database.
 
-URL: https://<your-railway-domain>/addSchool
+URL: https://school-management-api-production-88e4.up.railway.app/addSchool
 
 Method: POST
 
@@ -43,7 +43,7 @@ Successful Response (Status: 201 Created):
 2. List Schools (GET /listSchools)
 This endpoint retrieves a list of all schools from the database, sorted by their distance from a given latitude and longitude.
 
-URL: https://<your-railway-domain>/listSchools
+URL: https://school-management-api-production-88e4.up.railway.app/listSchools
 
 Method: GET
 
@@ -54,7 +54,7 @@ latitude: The user's latitude.
 longitude: The user's longitude.
 
 Example Request:
-https://<your-railway-domain>/listSchools?latitude=40.7128&longitude=-74.0060
+https://school-management-api-production-88e4.up.railway.app/listSchools?latitude=40.7128&longitude=-74.0060
 
 Successful Response (Status: 200 OK):
 
@@ -73,7 +73,7 @@ Getting Started
 To run this project locally, follow these steps:
 
 Clone this repository:
-git clone https://github.com/your-username/school-management-api-nodejs.git
+git clone https://github.com/Rahul-Jaindotcom/school-management-api-nodejs.git
 
 Install dependencies:
 npm install
