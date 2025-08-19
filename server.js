@@ -12,11 +12,15 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 db.connect((err) => {
@@ -230,6 +234,15 @@ app.get('/listSchools', (req, res) => {
   }
 });
 
+app.get('/test-db', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT NOW() AS now');
+    res.json({ success: true, db_time: rows[0].now });
+  } catch (err) {
+    console.error('DB connection error:', err.message);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
