@@ -234,14 +234,17 @@ app.get('/listSchools', (req, res) => {
   }
 });
 
-app.get('/test-db', async (req, res) => {
-  try {
-    const [rows] = await db.query('SELECT NOW() AS now');
-    res.json({ success: true, db_time: rows[0].now });
-  } catch (err) {
-    console.error('DB connection error:', err.message);
-    res.status(500).json({ success: false, error: err.message });
-  }
+// Health check DB route
+app.get('/test-db', (req, res) => {
+  db.getConnection((err, connection) => {
+    if (err) {
+      console.error('DB Connection Failed:', err);
+      res.status(500).json({ success: false, message: 'Database connection failed', error: err.message });
+      return;
+    }
+    connection.release();
+    res.json({ success: true, message: 'Database connected!' });
+  });
 });
 
 // Error handling middleware
